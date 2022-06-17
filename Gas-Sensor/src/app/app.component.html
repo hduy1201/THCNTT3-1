@@ -1,0 +1,22 @@
+
+<div>{{this.date}}</div>
+<div>{{this.time}}</div>
+<div>{{this.data.Gas}}</div>
+<p-chart type="line" [data]="data_Graph" width="900px" height="600px" [responsive]="false" ></p-chart>
+<div *ngIf="showAudio;">
+    <div>Cháy rồi chạy đi!</div>
+    <audio autoplay preload="none" loop>
+        <!-- <source src="../assets/music/Chạy Ngay Đi - Sơn Tùng M-TP - Bài hát, lyrics.mp3"> -->
+        <!-- <source src="https://open.spotify.com/track/4z9gBZQjGS4QLb4LOvmeuA?si=da26e45329dd4a36"> -->
+        <source src="../assets/music/[MV] BTS(방탄소년단) _ FIRE (불타오르네).mp3">
+    </audio>
+</div>
+<div *ngIf="!showAudio;">
+    <div>Everything will be alright!</div>
+    <audio autoplay preload="none" loop>
+        <!-- <source src="../assets/music/Chạy Ngay Đi - Sơn Tùng M-TP - Bài hát, lyrics.mp3"> -->
+        <!-- <source src="https://open.spotify.com/track/4z9gBZQjGS4QLb4LOvmeuA?si=da26e45329dd4a36"> -->
+        <source src="../assets/music/Winter Sonata Ost [ Instrumental ] - Winter Sonata Ost - Bài hát, lyrics.mp3">
+    </audio>
+</div>
+<router-outlet></router-outlet>

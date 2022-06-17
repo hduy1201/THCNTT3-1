@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "app-nct": {
+      "hosting": {
+        "Gas-Sensor": [
+          "app-nct"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "app-nct"
+  }
+}
