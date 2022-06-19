@@ -1,0 +1,21 @@
+
+<div>{{this.date}}</div>
+<div>{{this.time}}</div>
+<div>{{this.data.Gas}}</div>
+<p-chart type="line" [data]="data_Graph" width="900px" height="600px" [responsive]="false" ></p-chart>
+<div *ngIf="showAudio;">
+    <div>Cháy rồi chạy đi!</div>
+    <audio autoplay preload="none" loop>
+        <!-- <source src="../assets/music/Chạy Ngay Đi - Sơn Tùng M-TP - Bài hát, lyrics.mp3"> -->
+        <!-- <source src="https://open.spotify.com/track/4z9gBZQjGS4QLb4LOvmeuA?si=da26e45329dd4a36"> -->
+        <source src="assets/music/fire.mp3">
+    </audio>
+</div>
+<div *ngIf="!showAudio;">
+    <div>Everything will be alright!</div>
+    <audio autoplay preload="none" loop>
+        <!-- <source src="../assets/music/Chạy Ngay Đi - Sơn Tùng M-TP - Bài hát, lyrics.mp3"> -->
+        <!-- <source src="https://open.spotify.com/track/4z9gBZQjGS4QLb4LOvmeuA?si=da26e45329dd4a36"> -->
+        <source src="assets/music/ws.mp3">
+    </audio>
+</div>

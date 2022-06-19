@@ -8,9 +8,13 @@ import { environment } from '../environments/environment';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import {ChartModule} from 'primeng/chart';
+import { MainComponent } from './pages/main/main.component';
+import { HistoryComponent } from './pages/history/history.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MainComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,
