@@ -3,7 +3,7 @@
 <div>{{this.time}}</div>
 <div>{{this.data.Gas}}</div>
 <p-chart type="line" [data]="data_Graph" width="900px" height="600px" [responsive]="false" ></p-chart>
-<div *ngIf="showAudio;">
+<div *ngIf="showAudio">
     <div>Cháy rồi chạy đi!</div>
     <audio autoplay preload="none" loop>
         <!-- <source src="../assets/music/Chạy Ngay Đi - Sơn Tùng M-TP - Bài hát, lyrics.mp3"> -->
@@ -11,7 +11,7 @@
         <source src="assets/music/fire.mp3">
     </audio>
 </div>
-<div *ngIf="!showAudio;">
+<div *ngIf="!showAudio">
     <div>Everything will be alright!</div>
     <audio autoplay preload="none" loop>
         <!-- <source src="../assets/music/Chạy Ngay Đi - Sơn Tùng M-TP - Bài hát, lyrics.mp3"> -->
