@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseApp } from '@angular/fire/app';
-import { AnyForUntypedForms } from '@angular/forms';
-import { getDatabase, ref, child, get, onChildAdded } from "firebase/database";
+
+import { getDatabase, ref, child, get } from "firebase/database";
 import { Gas_Detail } from 'src/app/models/gas.model';
+import { HistoryService } from 'src/app/services/history.service';
 
 
 @Component({
@@ -14,11 +15,11 @@ import { Gas_Detail } from 'src/app/models/gas.model';
 export class HistoryComponent implements OnInit {
   basicData: any;
   basicOptions: any;
+  day: string = "";
   hour: any;
   tempList: Array<Gas_Detail> = [];
   timeList: any[] = [];
   gasList: any[] = [];
-  
   values : any[] = [];
   
   toTimestamp(dayString: string, time: string) {
@@ -28,7 +29,7 @@ export class HistoryComponent implements OnInit {
     return currentTimestamp;
   }
 
-  constructor(firebase: FirebaseApp) {
+  constructor(firebase: FirebaseApp, private his: HistoryService) {
     this.basicData = {
       labels: [],
       datasets: [
@@ -40,18 +41,19 @@ export class HistoryComponent implements OnInit {
       ]
     };
     
+    this.day = this.his.getDay();
+    let temp = this.day.split("/");
+    let cvt_Day = temp[0] + "-" + temp[1] + "-" + temp[2];
+    console.log(cvt_Day);
     const db = getDatabase(firebase);
     const myRef = ref(db,);
 
 
 
-    get(child(myRef, "/day/23-6-2022/time")).then((snapshot) => {
+    get(child(myRef, `/day/${cvt_Day}/time`)).then((snapshot) => {
       if (snapshot.exists()) {
         this.tempList.push(snapshot.val());
         let convertArr = Object.values(this.tempList.flat()[0]);
-        // let current: number = 0;
-        let timeline: number = 0;
-        let total: number = 0;
         console.log(convertArr);
         let currentTimestamp = this.toTimestamp(convertArr[0].day, "00:00:00");
         console.log(currentTimestamp);
@@ -96,43 +98,6 @@ export class HistoryComponent implements OnInit {
     });
     
   }
-
-  //   for (let i = 0; i < convertArr.length; i++) {
-
-  //     console.log(convertArr[i]);
-  //     let day = convertArr[i].day.split("/");
-  //     let cvt_day = day[1] + "/" + day[0] + "/" + day[2];
-
-  //     if(toTimestamp(cvt_day + " " + convertArr[i].time) > timeline + (2*60*60*1000)){
-  //       console.log(total);
-
-  //       timeline += 2*60*60*1000; 
-  //       const date = new Date(timeline*1000);
-  //       this.timeList.push(date.toLocaleTimeString());
-  //       console.log(this.gasList,this.timeList);
-  //     }
-  //     if (timeline <= toTimestamp(cvt_day + " " + convertArr[i].time) && timeline + (2*60*60*1000) >= toTimestamp(cvt_day + " " + convertArr[i].time)) {
-  //       total += Number(convertArr[i].gas);
-  //     }
-
-  //     // console.log(toTimestamp(cvt_day + " " + convertArr[i].time));
-  //     // console.log(toTimestamp('6/17/2022 16:18:51'));
-  //     // console.log(toTimestamp('02/13/2020 23:31:30'));
-  //   }
-  // } else {
-  //   console.log("No data available");
-  // }
-  // }).catch((error) => {
-  //   console.error(error);
-  // });
-
-
-  // onChildAdded(child(myRef, "/day/17-6-2022/time"), (data) => {
-  //    this.tempList.push(data.val());
-  //    this.convert(this.tempList);
-  // });
-
-
 
   ngOnInit(): void {  
 
